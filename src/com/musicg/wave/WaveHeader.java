@@ -31,7 +31,8 @@ public class WaveHeader {
 	public static final String WAVE_HEADER = "WAVE";
 	public static final String FMT_HEADER = "fmt ";
 	public static final String DATA_HEADER = "data";
-	public static final int HEADER_BYTE_LENGTH = 44;	// 44 bytes for header
+//	public static final int HEADER_BYTE_LENGTH = 44;	// 44 bytes for header
+	public static final int HEADER_BYTE_LENGTH = 78;	// 44 bytes for header
 
 	private boolean valid;
 	private String chunkId;	// 4 bytes
