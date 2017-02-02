@@ -25,6 +25,10 @@ public class Complex {
         return new Complex(this.re * b.re - this.im * b.im,
                 this.re * b.im + this.im * b.re);
     }
+    
+    public double abs(){
+    	return Math.sqrt(this.re*this.re + this.im*this.im);
+    }
  
     @Override
     public String toString() {
