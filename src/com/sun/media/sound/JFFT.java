@@ -1,9 +1,9 @@
-package com.jmusic;
+package com.sun.media.sound;
 import static java.lang.Math.*;
 
-public class FFTTest {
+public class JFFT {
  
-    public static int bitReverse(int n, int bits) {
+    private int bitReverse(int n, int bits) {
         int reversedN = n;
         int count = bits - 1;
  
@@ -17,7 +17,7 @@ public class FFTTest {
         return ((reversedN << count) & ((1 << bits) - 1));
     }
  
-    static void fft(Complex[] buffer) {
+    private void fft(Complex[] buffer) {
  
         int bits = (int) (log(buffer.length) / log(2));
         for (int j = 1; j < buffer.length / 2; j++) {
@@ -46,9 +46,13 @@ public class FFTTest {
             }
         }
     }
- 
-    public static double[] transform() {
-        double input[] = {-232.56000000000006, -2403.1699999999996, -2592.5900000000006, -296.40000000000003};
+    
+    /**
+     * 
+     * @param input input data to be transformed
+     * @return transformed data
+     */
+    public double[] transform(double input[]) {
  
         Complex[] cinput = new Complex[input.length];
         for (int i = 0; i < input.length; i++)
@@ -58,9 +62,8 @@ public class FFTTest {
         
         int pos = 0;
         double ans[] = new double[2*cinput.length];
-//        System.out.println("Results:");
+        
         for (Complex c : cinput) {
-//            System.out.println(c);
         	ans[pos] = c.re;
         	ans[pos+1] = c.im;
         	pos+=2;
@@ -68,23 +71,21 @@ public class FFTTest {
         return ans;
     }
     
-    public static double[] transform_rfft() {
-      double input[] = {-232.56000000000006, -2403.1699999999996, -2592.5900000000006, -296.40000000000003};
+    /**
+     * 
+     * @param input data to be transformed
+     * @return transformed data
+     * 
+     * When the DFT is computed for purely real input, the output is
+       Hermitian-symmetric, i.e. the negative frequency terms are just the complex
+       conjugates of the corresponding positive-frequency terms, and the
+       negative-frequency terms are therefore redundant.  This function does not
+       compute the negative frequency terms, and the length of the transformed
+       axis of the output is therefore ``n//2 + 1``.
+     */
+    public double[] transform_rfft(double input[]) {
 
-      Complex[] cinput = new Complex[input.length];
-      for (int i = 0; i < input.length; i++)
-          cinput[i] = new Complex(input[i], 0.0);
-
-      fft(cinput);
-      
-      int pos = 0;
-      double ans[] = new double[2*cinput.length];
-
-      for (Complex c : cinput) {
-      	ans[pos] = c.re;
-      	ans[pos+1] = c.im;
-      	pos+=2;
-      }
+      double ans[] = transform(input);
       
       // Calculates rfft from fft
       int arrSize = ans.length;

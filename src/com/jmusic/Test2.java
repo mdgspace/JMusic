@@ -2,6 +2,7 @@ package com.jmusic;
 
 import com.musicg.wave.Wave;
 import com.musicg.wave.extension.Spectrogram;
+import com.sun.media.sound.JFFT;
 
 public class Test2 {
 
@@ -18,10 +19,12 @@ public class Test2 {
 		for(int i = 0;i<arr[0].length;i++)
 			System.out.println(arr[0][i]);
 		
+		double input[] = {-232.56000000000006, -2403.1699999999996, -2592.5900000000006, -296.40000000000003};
 		
-//		double ans[] = FFTTest.transform_rfft();
-//		for(int i = 0;i<ans.length;i++)
-//			System.out.println(ans[i]);
+		JFFT fft = new JFFT();
+		double ans[] = fft.transform_rfft(input);
+		for(int i = 0;i<ans.length;i++)
+			System.out.println(ans[i]);
 		
 	}
 
