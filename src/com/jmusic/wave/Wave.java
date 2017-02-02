@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.musicg.wave;
+package com.jmusic.wave;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,11 +22,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import com.jmusic.wave.extension.NormalizedSampleAmplitudes;
+import com.jmusic.wave.extension.Spectrogram;
 import com.musicg.fingerprint.FingerprintManager;
 import com.musicg.fingerprint.FingerprintSimilarity;
 import com.musicg.fingerprint.FingerprintSimilarityComputer;
-import com.musicg.wave.extension.NormalizedSampleAmplitudes;
-import com.musicg.wave.extension.Spectrogram;
 
 /**
  * Read WAVE headers and data from wave input stream

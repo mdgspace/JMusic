@@ -1,11 +1,11 @@
 package com.musicg.experiment.test;
 
+import com.jmusic.wave.Wave;
+import com.jmusic.wave.extension.Spectrogram;
 import com.musicg.math.rank.ArrayRankDouble;
 import com.musicg.math.statistics.SpectralCentroid;
 import com.musicg.math.statistics.StandardDeviation;
 import com.musicg.pitch.PitchHandler;
-import com.musicg.wave.Wave;
-import com.musicg.wave.extension.Spectrogram;
 
 public class Test1 {
 

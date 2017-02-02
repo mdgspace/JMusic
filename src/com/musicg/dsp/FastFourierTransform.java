@@ -16,7 +16,7 @@
 
 package com.musicg.dsp;
 
-import com.sun.media.sound.JFFT;
+import com.jmusic.math.FFT;
 
 /**
  * FFT object, transform amplitudes to frequency intensities
@@ -36,7 +36,7 @@ public class FastFourierTransform {
 	public double[] getMagnitudes(double[] amplitudes) {
 
 		// call the fft and transform the complex numbers
-		JFFT fft = new JFFT();
+		FFT fft = new FFT();
 		
 		double[] fftData = fft.transform_rfft(amplitudes);
 

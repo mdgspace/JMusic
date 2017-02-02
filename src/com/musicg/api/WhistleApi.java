@@ -16,7 +16,7 @@
 
 package com.musicg.api;
 
-import com.musicg.wave.WaveHeader;
+import com.jmusic.wave.WaveHeader;
 
 /**
  * Api for detecting whistle

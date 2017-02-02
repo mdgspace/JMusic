@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.musicg.wave.extension;
+package com.jmusic.wave.extension;
 
+import com.jmusic.utils.WindowFunction;
+import com.jmusic.wave.Wave;
 import com.musicg.dsp.FastFourierTransform;
-import com.musicg.dsp.WindowFunction;
-import com.musicg.wave.Wave;
 
 /**
  * Handles the wave data in frequency-time domain.

@@ -1,4 +1,4 @@
-package com.musicg.wave;
+package com.jmusic.wave;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.musicg.wave.extension;
+package com.jmusic.wave.extension;
 
-import com.musicg.wave.Wave;
+import com.jmusic.wave.Wave;
 
 /**
  * Handles the wave data in amplitude-time domain.

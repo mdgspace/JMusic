@@ -1,8 +1,8 @@
 package com.jmusic;
 
-import com.musicg.wave.Wave;
-import com.musicg.wave.extension.Spectrogram;
-import com.sun.media.sound.JFFT;
+import com.jmusic.math.FFT;
+import com.jmusic.wave.Wave;
+import com.jmusic.wave.extension.Spectrogram;
 
 public class Test2 {
 
@@ -21,7 +21,7 @@ public class Test2 {
 		
 		double input[] = {-232.56000000000006, -2403.1699999999996, -2592.5900000000006, -296.40000000000003};
 		
-		JFFT fft = new JFFT();
+		FFT fft = new FFT();
 		double ans[] = fft.transform_rfft(input);
 		for(int i = 0;i<ans.length;i++)
 			System.out.println(ans[i]);

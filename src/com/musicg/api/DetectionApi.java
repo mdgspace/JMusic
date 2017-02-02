@@ -16,12 +16,12 @@
 
 package com.musicg.api;
 
+import com.jmusic.wave.Wave;
+import com.jmusic.wave.WaveHeader;
+import com.jmusic.wave.extension.Spectrogram;
 import com.musicg.math.rank.ArrayRankDouble;
 import com.musicg.math.statistics.StandardDeviation;
 import com.musicg.math.statistics.ZeroCrossingRate;
-import com.musicg.wave.Wave;
-import com.musicg.wave.WaveHeader;
-import com.musicg.wave.extension.Spectrogram;
 
 /**
  * Api for detecting different sounds

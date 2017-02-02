@@ -25,12 +25,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.musicg.dsp.Resampler;
+import com.jmusic.utils.Resampler;
+import com.jmusic.wave.Wave;
+import com.jmusic.wave.WaveHeader;
+import com.jmusic.wave.extension.Spectrogram;
 import com.musicg.processor.TopManyPointsProcessorChain;
 import com.musicg.properties.FingerprintProperties;
-import com.musicg.wave.Wave;
-import com.musicg.wave.WaveHeader;
-import com.musicg.wave.extension.Spectrogram;
 
 /**
  * Audio fingerprint manager, handle fingerprint operations

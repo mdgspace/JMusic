@@ -1,7 +1,7 @@
 package com.jmusic;
 
-import com.musicg.wave.Wave;
-import com.musicg.wave.extension.Spectrogram;
+import com.jmusic.wave.Wave;
+import com.jmusic.wave.extension.Spectrogram;
 
 
 public class Test {
@@ -15,10 +15,9 @@ public class Test {
 		Wave wave = new Wave(filename);
 
 		// print the wave header and info
-//		System.out.println(wave);
+		System.out.println(wave);
 		
 		short amplitudes[] = wave.getSampleAmplitudes();
-		System.out.println("song length in sec - "+wave.length());
 		System.out.println("song length "+ amplitudes.length);
 //		for(int i = 0;i<100;i+=2){
 //			System.out.println(arr[i]);
@@ -27,7 +26,7 @@ public class Test {
 		Spectrogram s = new Spectrogram(wave);
 		double[][] data = s.getAbsoluteSpectrogramData();
 		
-		System.out.println("Number of frames - "+s.getNumFrames());
+		System.out.println("Nmber of frames - "+s.getNumFrames());
 		System.out.println(s.getNumFrequencyUnit());
 		
 //		for(int i=0; i< data[0].length;i++){

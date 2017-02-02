@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.musicg.wave;
+package com.jmusic.wave;
 
 import java.io.IOException;
 import java.io.InputStream;

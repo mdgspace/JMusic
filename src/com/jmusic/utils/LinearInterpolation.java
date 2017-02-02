@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.musicg.dsp;
+package com.jmusic.utils;
 
 /**
  * Construct new data points within the range of a discrete set of known data points by linear equation

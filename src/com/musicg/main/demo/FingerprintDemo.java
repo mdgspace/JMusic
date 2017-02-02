@@ -15,8 +15,8 @@
  */
 package com.musicg.main.demo;
 
+import com.jmusic.wave.Wave;
 import com.musicg.fingerprint.FingerprintManager;
-import com.musicg.wave.Wave;
 
 public class FingerprintDemo{
 	

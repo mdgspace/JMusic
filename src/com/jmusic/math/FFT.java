@@ -1,7 +1,7 @@
-package com.sun.media.sound;
+package com.jmusic.math;
 import static java.lang.Math.*;
 
-public class JFFT {
+public class FFT {
  
     private int bitReverse(int n, int bits) {
         int reversedN = n;

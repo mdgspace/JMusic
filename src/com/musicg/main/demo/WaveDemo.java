@@ -15,8 +15,8 @@
  */
 package com.musicg.main.demo;
 
-import com.musicg.wave.Wave;
-import com.musicg.wave.WaveFileManager;
+import com.jmusic.wave.Wave;
+import com.jmusic.wave.WaveFileManager;
 
 public class WaveDemo {
 

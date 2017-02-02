@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.musicg.dsp;
+package com.jmusic.utils;
 
 /**
  * Window functions generator
