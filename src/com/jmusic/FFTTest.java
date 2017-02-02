@@ -47,8 +47,8 @@ public class FFTTest {
         }
     }
  
-    public static double[] transform(double[] input) {
-//        double[] input = {-232.56000000000006, -2403.1699999999996, -2592.5900000000006, -296.40000000000003};
+    public static double[] transform() {
+        double input[] = {-232.56000000000006, -2403.1699999999996, -2592.5900000000006, -296.40000000000003};
  
         Complex[] cinput = new Complex[input.length];
         for (int i = 0; i < input.length; i++)
@@ -67,6 +67,34 @@ public class FFTTest {
         }
         return ans;
     }
+    
+    public static double[] transform_rfft() {
+      double input[] = {-232.56000000000006, -2403.1699999999996, -2592.5900000000006, -296.40000000000003};
+
+      Complex[] cinput = new Complex[input.length];
+      for (int i = 0; i < input.length; i++)
+          cinput[i] = new Complex(input[i], 0.0);
+
+      fft(cinput);
+      
+      int pos = 0;
+      double ans[] = new double[2*cinput.length];
+
+      for (Complex c : cinput) {
+      	ans[pos] = c.re;
+      	ans[pos+1] = c.im;
+      	pos+=2;
+      }
+      
+      // Calculates rfft from fft
+      int arrSize = ans.length;
+      double rfftAns[] = new double[(arrSize>>1) + 2];
+      
+      for(int i = 0;i<rfftAns.length;i++)
+    	  rfftAns[i] = ans[i];
+      
+      return rfftAns;
+  }
 }
  
 class Complex {

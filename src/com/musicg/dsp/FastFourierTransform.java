@@ -46,7 +46,7 @@ public class FastFourierTransform {
 //		System.out.println(amplitudes.length);
 		
 //		amplitudes = FFTbase.fft(amplitudes, new double[sampleSize], true);
-		amplitudes = FFTTest.transform(amplitudes);
+		amplitudes = FFTTest.transform_rfft(amplitudes);
 //		System.out.println(amplitudes.length);
 		
 		// end call the fft and transform the complex numbers
