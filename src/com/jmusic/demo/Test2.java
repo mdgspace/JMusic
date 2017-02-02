@@ -1,4 +1,4 @@
-package com.jmusic;
+package com.jmusic.demo;
 
 import com.jmusic.math.FFT;
 import com.jmusic.wave.Wave;
