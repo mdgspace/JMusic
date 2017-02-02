@@ -15,25 +15,29 @@ public class Test {
 		Wave wave = new Wave(filename);
 
 		// print the wave header and info
-		System.out.println(wave);
+//		System.out.println(wave);
 		
-//		short arr[] = wave.getSampleAmplitudes();
+		short amplitudes[] = wave.getSampleAmplitudes();
+		System.out.println("song length in sec - "+wave.length());
+		System.out.println("song length "+ amplitudes.length);
 //		for(int i = 0;i<100;i+=2){
 //			System.out.println(arr[i]);
 //		}
-
-		// trim the wav
-//		wave.leftTrim(1);
-//		wave.rightTrim(0.5F);
 		
 		Spectrogram s = new Spectrogram(wave);
-		double[][] data = s.getNormalizedSpectrogramData();
+		double[][] data = s.getAbsoluteSpectrogramData();
 		
-		System.out.println(data.length);
-		System.out.println(data[0].length);
+		System.out.println("Number of frames - "+s.getNumFrames());
+		System.out.println(s.getNumFrequencyUnit());
+		
+//		for(int i=0; i< data[0].length;i++){
+//			System.out.println(data[0][i]);
+//		}
+		System.out.println(s.getFramesPerSecond());
+		
 		
 		// save the trimmed wav
 //		WaveFileManager waveFileManager=new WaveFileManager(wave);
-//		waveFileManager.saveWaveAsFile(outFolder+"/out.wav");	
+//		waveFileManager.saveWaveAsFile(outFolder+"/out.wav");
     }
 }

@@ -1,6 +1,5 @@
 package com.musicg.experiment.test;
 
-import com.musicg.graphic.GraphicRender;
 import com.musicg.math.rank.ArrayRankDouble;
 import com.musicg.math.statistics.SpectralCentroid;
 import com.musicg.math.statistics.StandardDeviation;
@@ -12,7 +11,7 @@ public class Test1 {
 
 	public static void main(String[] args) {		
 		
-		String filename = "audio_work/lala.wav";
+		String filename = "audio_work/pop.00000.wav";
 
 		// create a wave object
 		Wave wave = new Wave(filename);
@@ -76,11 +75,6 @@ public class Test1 {
 			boundedSpectrogramData[i]=temp;
 		}
 		
-		// Graphic render		
-		GraphicRender render=new GraphicRender();
-		render.setHorizontalMarker(61);
-		render.setVerticalMarker(200);
-		render.renderSpectrogramData(boundedSpectrogramData, filename+".jpg");
 		
 		PitchHandler ph=new PitchHandler();
 

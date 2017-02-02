@@ -19,12 +19,11 @@ public class Test2 {
 		
 		System.out.println(arr[0].length);
 		
-		for(int i = 0;i<arr[0].length;i++)
+		for(int i = 0;i<arr[0].length;i++){
 			System.out.println(arr[0][i]);
+		}
+			
 		
-//		SpectralCentroid spcen = new SpectralCentroid(arr[0]);
-//		
-//		System.out.println(spcen.evaluate());
 	}
 
 }
