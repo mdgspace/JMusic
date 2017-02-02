@@ -1,7 +1,51 @@
 package com.jmusic.math;
 import static java.lang.Math.*;
 
+import com.jmusic.segment.Complex;
+
 public class FFT {
+	
+    /**
+     * 
+     * @param input input data to be transformed
+     * @return transformed data
+     */
+    public Complex[] transform(double input[]) {
+ 
+        Complex[] cinput = new Complex[input.length];
+        for (int i = 0; i < input.length; i++)
+            cinput[i] = new Complex(input[i], 0.0);
+ 
+        fft(cinput);
+        
+        return cinput;
+    }
+    
+    /**
+     * 
+     * When the DFT is computed for purely real input, the output is
+     * Hermitian-symmetric, i.e. the negative frequency terms are just the complex
+     * conjugates of the corresponding positive-frequency terms, and the
+     * negative-frequency terms are therefore redundant.  This function thus return
+     * these positive frequency data
+     * 
+     * @param input data to be transformed
+     * @return transformed data
+     * 
+     */
+    public Complex[] transform_rfft(double input[]) {
+
+      Complex ans[] = transform(input);
+      
+      // Calculates rfft from fft
+      int arrSize = ans.length;
+      Complex rfftAns[] = new Complex[(arrSize>>1) + 1];
+      
+      for(int i = 0;i<rfftAns.length;i++)
+    	  rfftAns[i] = ans[i];
+      
+      return rfftAns;
+  }
  
     private int bitReverse(int n, int bits) {
         int reversedN = n;
@@ -47,85 +91,4 @@ public class FFT {
         }
     }
     
-    /**
-     * 
-     * @param input input data to be transformed
-     * @return transformed data
-     */
-    public double[] transform(double input[]) {
- 
-        Complex[] cinput = new Complex[input.length];
-        for (int i = 0; i < input.length; i++)
-            cinput[i] = new Complex(input[i], 0.0);
- 
-        fft(cinput);
-        
-        int pos = 0;
-        double ans[] = new double[2*cinput.length];
-        
-        for (Complex c : cinput) {
-        	ans[pos] = c.re;
-        	ans[pos+1] = c.im;
-        	pos+=2;
-        }
-        return ans;
-    }
-    
-    /**
-     * 
-     * @param input data to be transformed
-     * @return transformed data
-     * 
-     * When the DFT is computed for purely real input, the output is
-       Hermitian-symmetric, i.e. the negative frequency terms are just the complex
-       conjugates of the corresponding positive-frequency terms, and the
-       negative-frequency terms are therefore redundant.  This function does not
-       compute the negative frequency terms, and the length of the transformed
-       axis of the output is therefore ``n//2 + 1``.
-     */
-    public double[] transform_rfft(double input[]) {
-
-      double ans[] = transform(input);
-      
-      // Calculates rfft from fft
-      int arrSize = ans.length;
-      double rfftAns[] = new double[(arrSize>>1) + 2];
-      
-      for(int i = 0;i<rfftAns.length;i++)
-    	  rfftAns[i] = ans[i];
-      
-      return rfftAns;
-  }
-}
- 
-class Complex {
-    public final double re;
-    public final double im;
- 
-    public Complex() {
-        this(0, 0);
-    }
- 
-    public Complex(double r, double i) {
-        re = r;
-        im = i;
-    }
- 
-    public Complex add(Complex b) {
-        return new Complex(this.re + b.re, this.im + b.im);
-    }
- 
-    public Complex sub(Complex b) {
-        return new Complex(this.re - b.re, this.im - b.im);
-    }
- 
-    public Complex mult(Complex b) {
-        return new Complex(this.re * b.re - this.im * b.im,
-                this.re * b.im + this.im * b.re);
-    }
- 
-    @Override
-    public String toString() {
-        return String.format("(%f,%f)", re, im);
-    }
 }

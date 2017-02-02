@@ -17,6 +17,7 @@
 package com.musicg.dsp;
 
 import com.jmusic.math.FFT;
+import com.jmusic.segment.Complex;
 
 /**
  * FFT object, transform amplitudes to frequency intensities
@@ -38,7 +39,7 @@ public class FastFourierTransform {
 		// call the fft and transform the complex numbers
 		FFT fft = new FFT();
 		
-		double[] fftData = fft.transform_rfft(amplitudes);
+		Complex[] fftData = fft.transform_rfft(amplitudes);
 
 		// even indexes (0,2,4,6,...) are real parts
 		// odd indexes (1,3,5,7,...) are img parts
@@ -51,7 +52,16 @@ public class FastFourierTransform {
 //		}
 
 //		return mag;
-		return fftData;
+		
+		int pos = 0;
+        double ans[] = new double[2*fftData.length];
+        
+        for (Complex c : fftData) {
+        	ans[pos] = c.re;
+        	ans[pos+1] = c.im;
+        	pos+=2;
+        }
+        return ans;
 	}
 
 }
