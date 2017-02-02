@@ -17,6 +17,8 @@
 package com.musicg.dsp;
 
 import com.sun.media.sound.FFT;
+import com.sun.media.sound.FFTTest;
+import com.sun.media.sound.FFTbase;
 
 /**
  * FFT object, transform amplitudes to frequency intensities
@@ -38,15 +40,22 @@ public class FastFourierTransform {
 		int sampleSize = amplitudes.length;
 
 		// call the fft and transform the complex numbers
-		FFT fft = new FFT(sampleSize / 2, -1);
-		fft.transform(amplitudes);
+		
+//		FFT fft = new FFT(sampleSize / 2, -1);
+//		fft.transform(amplitudes);
+//		System.out.println(amplitudes.length);
+		
+//		amplitudes = FFTbase.fft(amplitudes, new double[sampleSize], true);
+		amplitudes = FFTTest.transform(amplitudes);
+//		System.out.println(amplitudes.length);
+		
 		// end call the fft and transform the complex numbers
 
 		double[] complexNumbers = amplitudes;
 
 		// even indexes (0,2,4,6,...) are real parts
 		// odd indexes (1,3,5,7,...) are img parts
-		int indexSize = sampleSize / 2;
+		int indexSize = sampleSize;
 
 		// FFT produces a transformed pair of arrays where the first half of the
 		// values represent positive frequency components and the second half
@@ -56,10 +65,12 @@ public class FastFourierTransform {
 
 		double[] mag = new double[positiveSize];
 		for (int i = 0; i < indexSize; i += 2) {
+			mag[i / 2] = complexNumbers[i];
 			mag[i / 2] = Math.sqrt(complexNumbers[i] * complexNumbers[i] + complexNumbers[i + 1] * complexNumbers[i + 1]);
 		}
 
-		return mag;
+//		return mag;
+		return amplitudes;
 	}
 
 }
