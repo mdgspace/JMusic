@@ -23,6 +23,19 @@ public class Utils {
 		
 	}
 	
+	/**
+	 * @param totalFrames: Number of frames
+	 * @param segmentCount: Number of segments needed 
+	 * @return nearest power of 2 >= segment size
+	 */
+	public static int getSegmentSize(int totalFrames, int segmentCount){
+		int segmentSize = totalFrames / segmentCount;
+		int lg2 = (int) (Math.log(segmentSize)/Math.log(2));
+		if( (1<<lg2)*segmentCount < totalFrames )
+			return (1<<(lg2+1));
+		else return (1<<lg2);
+	}
+	
 	/*
 	 * @param wave: Wave object 
 	 * @param segmentSize: size of one Segment
