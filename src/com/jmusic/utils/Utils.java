@@ -7,7 +7,7 @@ import com.jmusic.wave.Wave;
 /**
  * Class containing helper functions
  * 
- * @author Deepankar Agrawal
+ * @author Deepankar Agrawal,Anshul Shah
  *
  */
 public class Utils {
@@ -30,7 +30,7 @@ public class Utils {
 	 * 
 	 * @return Array of segments
 	 */
-	public static Segment[] getSegments(Wave wave, int segmentSize, int overlapFactor){
+	public static Segment[] getSegments(Wave wave, int segmentSize, int overlapFactor, String windowType){
 		double[] amplitudes=wave.getAmplitudes();
 		int numSamples = amplitudes.length;
 		
@@ -58,7 +58,7 @@ public class Utils {
 			
 		// Segmentation of Amplitude Data 
 		WindowFunction window = new WindowFunction();
-		window.setWindowType("Hamming");
+		window.setWindowType(windowType);
 		double[] win=window.generate(segmentSize);
 	
 		double[][] signals=new double[numFrames][];
