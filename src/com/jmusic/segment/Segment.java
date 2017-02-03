@@ -3,6 +3,11 @@ package com.jmusic.segment;
 import com.jmusic.feature.SpectralCentroid;
 import com.jmusic.wave.Wave;
 
+/**
+ * 
+ * @author Deepankar Agrawal
+ *
+ */
 public class Segment {
 	
 	public short[] amplitude;

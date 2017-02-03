@@ -3,6 +3,11 @@ import static java.lang.Math.*;
 
 import com.jmusic.segment.Complex;
 
+/**
+ * 
+ * @author Anshul Shah, Deepankar Agrawal
+ *
+ */
 public class FFT {
 	
     /**

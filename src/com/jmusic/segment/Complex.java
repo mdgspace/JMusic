@@ -1,5 +1,12 @@
 package com.jmusic.segment;
 
+/**
+ * Data structure to hold complex number and provide basic mathematical
+ * functions for operations on them
+ * 
+ * @author Deepankar Agrawal
+ *
+ */
 public class Complex {
     public final double re;
     public final double im;
