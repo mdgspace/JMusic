@@ -8,10 +8,9 @@ public class SpectralVariance extends Feature<Double> {
 	/**
 	 * 
 	 * @param signal: Frequency-Domain signal
-	 * @param samplingRate: Not used
 	 */
-	public SpectralVariance(double[] signal, double samplingRate){
-		setValues(signal,samplingRate);
+	public SpectralVariance(double[] signal){
+		setValues(signal, 44000);
 	}
 	
 	public Double evaluate() {

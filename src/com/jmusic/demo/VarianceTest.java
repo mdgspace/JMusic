@@ -10,7 +10,7 @@ import com.jmusic.feature.SpectralVariance;
 public class VarianceTest {
 	public static void main(String[] args) {
 		double[] absRFFT = {5524.72, 3163.57731592, 125.58};
-		 SpectralVariance rf = new SpectralVariance(absRFFT, 22050);
+		 SpectralVariance rf = new SpectralVariance(absRFFT);
 		 // must be 4883903.911746848
 		 System.out.println(rf.evaluate());
 		 

@@ -2,6 +2,7 @@ package com.jmusic.segment;
 
 import com.jmusic.feature.SpectralCentroid;
 import com.jmusic.feature.SpectralMean;
+import com.jmusic.feature.SpectralVariance;
 import com.jmusic.math.FFT;
 import com.jmusic.utils.Utils;
 import com.jmusic.wave.Wave;
@@ -38,13 +39,36 @@ public class Segment {
 		this.absFrequencies = Utils.complexToAbs(frequencies);
 	}
 	
+	/**
+	 * Computes the mean of DFT frequencies
+	 * 
+	 * Mean = Σ Fi / N
+	 * 
+	 * @return mean of absolute frequencies
+	 */
 	public double spectralMean(){
 		SpectralMean mean = new SpectralMean(absFrequencies);
+		
 		return mean.evaluate();
 	}
 	
+	/**
+	 * 
+	 * @return variance of absolute frequencies
+	 */
+	public double spectralVariance(){
+		SpectralVariance variance = new SpectralVariance(absFrequencies);
+		
+		return variance.evaluate();
+	}
+	
+	/**
+	 * 
+	 * @return centroid of absolute frequencies
+	 */
 	public double spectralCentroid(){
 		SpectralCentroid sc = new SpectralCentroid(absFrequencies, samplingRate);
+		
 		return sc.evaluate();
 	}
 	
