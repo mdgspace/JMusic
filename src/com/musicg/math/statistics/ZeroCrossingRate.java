@@ -24,7 +24,7 @@ package com.musicg.math.statistics;
  */
 public class ZeroCrossingRate{
 	
-	private short[] signals;
+	private double[] signals;
 	private double lengthInSecond;
 	
 	/**
@@ -33,7 +33,7 @@ public class ZeroCrossingRate{
 	 * @param signals	input signal array
 	 * @param lengthInSecond	length of the signal (in second)
 	 */
-	public ZeroCrossingRate(short[] signals, double lengthInSecond){
+	public ZeroCrossingRate(double[] signals, double lengthInSecond){
 		setSignals(signals,1);
 	}
 	
@@ -43,7 +43,7 @@ public class ZeroCrossingRate{
 	 * @param signals	input signal array
 	 * @param lengthInSecond	length of the signal (in second)
 	 */
-	public void setSignals(short[] signals, double lengthInSecond){		
+	public void setSignals(double[] signals, double lengthInSecond){		
 		this.signals=signals;
 		this.lengthInSecond=lengthInSecond;
 	}

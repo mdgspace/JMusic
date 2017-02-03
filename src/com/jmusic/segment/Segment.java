@@ -10,17 +10,17 @@ import com.jmusic.wave.Wave;
  */
 public class Segment {
 	
-	public short[] amplitude;
+	public double[] amplitude;
 	public Complex[] frequencies;
 	public double[] absFrequencies;
 	
 	public double samplingRate;
 	
 	public Segment(Wave wave){
-		this(wave.getSampleAmplitudes(), wave.getWaveHeader().getSampleRate());
+		this(wave.getAmplitudes(), wave.getWaveHeader().getSampleRate());
 	}
 	
-	public Segment(short[] amplitude, int samplingRate){
+	public Segment(double[] amplitude, int samplingRate){
 		this.amplitude = amplitude;
 		this.samplingRate = (double)samplingRate;
 	}

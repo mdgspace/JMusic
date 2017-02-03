@@ -17,7 +17,7 @@ public class Test {
 		// print the wave header and info
 		System.out.println(wave);
 		
-		short amplitudes[] = wave.getSampleAmplitudes();
+		double amplitudes[] = wave.getAmplitudes();
 		System.out.println("song length "+ amplitudes.length);
 //		for(int i = 0;i<100;i+=2){
 //			System.out.println(arr[i]);

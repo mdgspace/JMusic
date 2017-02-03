@@ -94,7 +94,7 @@ public class DetectionApi {
 			// end set boundary
 
 			Wave wave = new Wave(waveHeader, audioBytes);	// audio bytes of this frame
-			short[] amplitudes = wave.getSampleAmplitudes();
+			double[] amplitudes = wave.getAmplitudes();
 
 			// spectrum for the clip
 			Spectrogram spectrogram = wave.getSpectrogram(fftSampleSize, 0);
@@ -247,7 +247,7 @@ public class DetectionApi {
 		return result;
 	}
 	
-	protected boolean isPassedZeroCrossingRate(short[] amplitudes){
+	protected boolean isPassedZeroCrossingRate(double[] amplitudes){
 		ZeroCrossingRate zcr = new ZeroCrossingRate(amplitudes, 1);
 		int numZeroCrosses = (int) zcr.evaluate();
 		

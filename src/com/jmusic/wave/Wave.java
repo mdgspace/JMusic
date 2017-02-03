@@ -293,10 +293,10 @@ public class Wave implements Serializable{
 	 * 
 	 * @return amplitudes array (signed 16-bit)
 	 */
-	public short[] getSampleAmplitudes(){
+	public double[] getAmplitudes(){
 		int bytePerSample = waveHeader.getBitsPerSample() / 8;
 		int numSamples = data.length / bytePerSample;
-		short[] amplitudes = new short[numSamples];
+		double[] amplitudes = new double[numSamples];
 		
 		int pointer = 0;
 		for (int i = 0; i < numSamples; i++) {

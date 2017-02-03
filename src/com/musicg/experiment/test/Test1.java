@@ -40,7 +40,7 @@ public class Test1 {
 		ArrayRankDouble arrayRankDouble=new ArrayRankDouble();
 		
 		// zrc
-		short[] amps=wave.getSampleAmplitudes();
+		double[] amps=wave.getAmplitudes();
 		int numFrame=amps.length/1024;
 		double[] zcrs=new double[numFrame];
 		

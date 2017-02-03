@@ -81,7 +81,7 @@ public class Spectrogram{
 	 */
 	private void buildSpectrogram(){
 
-		short[] amplitudes=wave.getSampleAmplitudes();
+		double[] amplitudes=wave.getAmplitudes();
 		int numSamples = amplitudes.length;
 		
 		int pointer=0;
@@ -90,7 +90,7 @@ public class Spectrogram{
 			int numOverlappedSamples=numSamples*overlapFactor;
 			int backSamples=fftSampleSize*(overlapFactor-1)/overlapFactor;
 			int fftSampleSize_1=fftSampleSize-1;
-			short[] overlapAmp= new short[numOverlappedSamples];
+			double[] overlapAmp= new double[numOverlappedSamples];
 			pointer=0;
 			for (int i=0; i<amplitudes.length; i++){
 				overlapAmp[pointer++]=amplitudes[i];

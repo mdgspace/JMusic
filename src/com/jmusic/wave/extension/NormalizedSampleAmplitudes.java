@@ -49,7 +49,7 @@ public class NormalizedSampleAmplitudes{
 				signed=false;
 			}
 			
-			short[] amplitudes=wave.getSampleAmplitudes();
+			double[] amplitudes=wave.getAmplitudes();
 			int numSamples = amplitudes.length;
 			int maxAmplitude = 1 << (wave.getWaveHeader().getBitsPerSample() - 1);
 			
