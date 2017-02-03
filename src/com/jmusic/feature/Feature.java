@@ -6,7 +6,7 @@ package com.jmusic.feature;
  * @author Deepankar Agrawal
  *
  */
-public abstract class Feature<T extends Number> {
+public abstract class Feature<T> {
 	
 	protected double[] signal;
 	protected double   samplingRate;
