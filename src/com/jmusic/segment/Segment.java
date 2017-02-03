@@ -1,5 +1,6 @@
 package com.jmusic.segment;
 
+import com.jmusic.feature.Rolloff;
 import com.jmusic.feature.SpectralCentroid;
 import com.jmusic.feature.SpectralMean;
 import com.jmusic.feature.SpectralVariance;
@@ -70,6 +71,18 @@ public class Segment {
 		SpectralCentroid sc = new SpectralCentroid(absFrequencies, samplingRate);
 		
 		return sc.evaluate();
+	}
+	
+	/**
+	 * Calculates the spectral rolloff, i.e. the frequency below 
+	 * which 85% of the spectrum's energy is located
+	 * 
+	 * @return roll off frequency
+	 */
+	public double rollOff(){
+		Rolloff rollOff = new Rolloff(absFrequencies, samplingRate);
+		
+		return rollOff.evaluate();
 	}
 	
 }
