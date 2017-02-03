@@ -14,7 +14,7 @@ public class VarianceTest {
 		 // must be 4883903.911746848
 		 System.out.println(rf.evaluate());
 		 
-		 SpectralMean mn = new SpectralMean(absRFFT, 22050);
+		 SpectralMean mn = new SpectralMean(absRFFT);
 		 // must be 2937.959105306667
 		 System.out.println(mn.evaluate());
 	}

@@ -1,6 +1,7 @@
 package com.jmusic.segment;
 
 import com.jmusic.feature.SpectralCentroid;
+import com.jmusic.feature.SpectralMean;
 import com.jmusic.math.FFT;
 import com.jmusic.utils.Utils;
 import com.jmusic.wave.Wave;
@@ -35,6 +36,11 @@ public class Segment {
 		FFT fft = new FFT();
 		this.frequencies = fft.transform_rfft(amplitude);
 		this.absFrequencies = Utils.complexToAbs(frequencies);
+	}
+	
+	public double spectralMean(){
+		SpectralMean mean = new SpectralMean(absFrequencies);
+		return mean.evaluate();
 	}
 	
 	public double spectralCentroid(){

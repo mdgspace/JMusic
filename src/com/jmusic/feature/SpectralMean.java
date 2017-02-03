@@ -8,10 +8,9 @@ public class SpectralMean extends Feature<Double> {
 	/**
 	 * 
 	 * @param signal: Frequency-Domain signal
-	 * @param samplingRate: Not used
 	 */
-	public SpectralMean(double[] signal, double samplingRate){
-		setValues(signal, samplingRate);
+	public SpectralMean(double[] signal){
+		setValues(signal, 44000);
 	}
 	
 	public Double evaluate() {

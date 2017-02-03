@@ -15,7 +15,7 @@ public class SpectralVariance extends Feature<Double> {
 	}
 	
 	public Double evaluate() {
-		SpectralMean sm = new SpectralMean(signal, samplingRate);
+		SpectralMean sm = new SpectralMean(signal);
 		double mean = sm.evaluate();
 		double temp = 0;
         for(double a :signal)
