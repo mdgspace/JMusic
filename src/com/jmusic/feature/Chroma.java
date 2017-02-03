@@ -36,6 +36,14 @@ public class Chroma extends Feature< double[] > {
 			chroma[pitchClass] += signal[i];
 		}
 		
+		// Normalization
+		double maxElement = 0;
+		for(int i = 0;i<12;i++)
+			maxElement = Math.max(maxElement,chroma[i]);
+		
+		for(int i = 0;i<12;i++)
+			chroma[i] /= maxElement;
+		
 		return chroma;
 	}
 	/*
