@@ -1,11 +1,14 @@
 package com.jmusic.segment;
 
+import org.omg.CORBA.FREE_MEM;
+
 import com.jmusic.feature.Rolloff;
 import com.jmusic.feature.SpectralCentroid;
 import com.jmusic.feature.SpectralMean;
 import com.jmusic.feature.SpectralVariance;
 import com.jmusic.feature.ZeroCrossingRate;
 import com.jmusic.math.FFT;
+import com.jmusic.math.FFT2;
 import com.jmusic.utils.Utils;
 import com.jmusic.wave.Wave;
 
@@ -31,13 +34,29 @@ public class Segment {
 		this.amplitude = amplitude;
 		this.samplingRate = (double)samplingRate;
 		
-		buildFFT(amplitude);
+		buildFFT2(amplitude);
 	}
 	
 	private void buildFFT(double[] amplitude){
 		// call the fft and transform to fourier domain
 		FFT fft = new FFT();
 		this.frequencies = fft.transform_rfft(amplitude);
+		this.absFrequencies = Utils.complexToAbs(frequencies);
+	}
+	
+	private void buildFFT2(double[] amplitude){
+		int indexSize = amplitude.length;
+		double amp[] = new double[indexSize];
+		System.arraycopy(amplitude, 0, amp, 0, indexSize);
+		
+		FFT2 fft = new FFT2(indexSize/2,-1);
+		fft.transform(amp);
+		
+		frequencies = new Complex[indexSize/2];
+		for(int i = 0;i<indexSize;i+=2){
+			frequencies[i/2] = new Complex(amp[i], amp[i+1]);
+		}
+		
 		this.absFrequencies = Utils.complexToAbs(frequencies);
 	}
 	

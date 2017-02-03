@@ -33,10 +33,7 @@ public class UtilTest {
 	
 	public void Test2(int segmentSize) {
 		Segment[] segment = Utils.getSegments(wave, segmentSize, 0,"HAMMING");
-//		for(int i =0;i<segment.length;i++){
-//			System.out.println(i + " : " + segment[i].amplitude.length);
-//		}
-		
+
 		BufferedWriter writer = null;
         try {
             File logFile = new File("out/absAmp.txt");
@@ -59,7 +56,6 @@ public class UtilTest {
         } 
         finally {
             try {
-                // Close the writer regardless of what happens...
                 writer.close();
             } catch (Exception e) {}
         }
