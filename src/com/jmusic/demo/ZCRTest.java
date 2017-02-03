@@ -3,7 +3,6 @@
  */
 package com.jmusic.demo;
 
-import com.jmusic.feature.SpectralCentroid;
 import com.jmusic.feature.ZeroCrossingRate;
 
 /**
@@ -12,7 +11,7 @@ import com.jmusic.feature.ZeroCrossingRate;
  */
 public class ZCRTest {
 	public static void main(String[] args) {
-		short input[] = {1, 4, -3, 5,-7 };
+		double input[] = {1, 4, -3, 5,-7 };
 		
 		ZeroCrossingRate sc = new ZeroCrossingRate(input,input.length);
 		

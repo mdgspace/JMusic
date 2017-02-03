@@ -4,6 +4,7 @@ import com.jmusic.feature.Rolloff;
 import com.jmusic.feature.SpectralCentroid;
 import com.jmusic.feature.SpectralMean;
 import com.jmusic.feature.SpectralVariance;
+import com.jmusic.feature.ZeroCrossingRate;
 import com.jmusic.math.FFT;
 import com.jmusic.utils.Utils;
 import com.jmusic.wave.Wave;
@@ -83,6 +84,13 @@ public class Segment {
 		Rolloff rollOff = new Rolloff(absFrequencies, samplingRate);
 		
 		return rollOff.evaluate();
+	}
+	
+	
+	public double zcr(){
+		ZeroCrossingRate zcr = new ZeroCrossingRate(amplitude, samplingRate);
+		
+		return zcr.evaluate();
 	}
 	
 }

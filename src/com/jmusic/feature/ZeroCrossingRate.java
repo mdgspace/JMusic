@@ -1,23 +1,19 @@
 package com.jmusic.feature;
+
 /**
  * Evaluate the zero crossing rate of a signal
  * 
- * 
- * 
- * @author Anshul Shah
+ * @author Anshul Shah, Deepankar Agrawal
  *
  */
 public class ZeroCrossingRate extends Feature<Double>{
 	/**
 	 * 
 	 * @param signal: Time - Domain Amplitude of the signal
-	 * @param samplingRate: Not used
+	 * @param samplingRate: sampling rate of audio signal
 	 */
-	public ZeroCrossingRate(short[] signal, double samplingRate){
-		double[] sig = new double[signal.length];
-		for(int i = 0;i<sig.length;i++)
-			sig[i] = signal[i];
-		setValues(sig, samplingRate);
+	public ZeroCrossingRate(double[] signal, double samplingRate){
+		setValues(signal, samplingRate);
 	}
 		
 	public Double evaluate(){
