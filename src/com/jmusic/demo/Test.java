@@ -1,7 +1,9 @@
 package com.jmusic.demo;
 
+import com.jmusic.segment.Segment;
+import com.jmusic.utils.Utils;
+import com.jmusic.utils.WindowFunction;
 import com.jmusic.wave.Wave;
-import com.jmusic.wave.extension.Spectrogram;
 
 
 public class Test {
@@ -9,30 +11,25 @@ public class Test {
     	
 		String filename = "audio_work/pop.00000.wav";
 
-		String outFolder="out";
+//		String outFolder="out";
 
 		// create a wave object
 		Wave wave = new Wave(filename);
 
 		// print the wave header and info
-		System.out.println(wave);
+//		System.out.println(wave);
 		
-		double amplitudes[] = wave.getAmplitudes();
-		System.out.println("song length "+ amplitudes.length);
-//		for(int i = 0;i<100;i+=2){
-//			System.out.println(arr[i]);
-//		}
+		Segment[] segments = Utils.getSegments(wave, 512, 0, 
+				WindowFunction.HAMMING);
 		
-		Spectrogram s = new Spectrogram(wave);
-		double[][] data = s.getAbsoluteSpectrogramData();
+		System.out.println(segments.length);
+		System.out.println(segments[0].amplitude.length);
 		
-		System.out.println("Nmber of frames - "+s.getNumFrames());
-		System.out.println(s.getNumFrequencyUnit());
+		double[] mfcc = segments[0].mfcc();
 		
-//		for(int i=0; i< data[0].length;i++){
-//			System.out.println(data[0][i]);
-//		}
-		System.out.println(s.getFramesPerSecond());
+		for(int i=0;i<mfcc.length;i++){
+			System.out.println(mfcc[i]);
+		}
 		
 		
 		// save the trimmed wav

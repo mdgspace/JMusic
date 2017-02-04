@@ -30,7 +30,7 @@ public class WindowFunction {
 	public static final int HAMMING = 3;
 	public static final int BLACKMAN = 4;
 
-	int windowType = 0; // defaults to rectangular window
+	int windowType = 3; // defaults to rectangular window
 
 	public WindowFunction() {
 	}
