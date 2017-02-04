@@ -3,11 +3,10 @@ package com.jmusic.demo;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import com.jmusic.segment.Segment;
 import com.jmusic.utils.Utils;
+import com.jmusic.utils.WindowFunction;
 import com.jmusic.wave.Wave;
 
 /**
@@ -32,7 +31,7 @@ public class UtilTest {
 	}
 	
 	public void Test2(int segmentSize) {
-		Segment[] segment = Utils.getSegments(wave, segmentSize, 0,"HAMMING");
+		Segment[] segment = Utils.getSegments(wave, segmentSize, 0,WindowFunction.HAMMING);
 
 		BufferedWriter writer = null;
         try {

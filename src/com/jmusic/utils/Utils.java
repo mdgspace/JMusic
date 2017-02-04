@@ -40,10 +40,13 @@ public class Utils {
 	 * @param wave: Wave object 
 	 * @param segmentSize: size of one Segment
 	 * @param overlapFactor: overlap fraction
+	 * @param windowType: Hamming window
 	 * 
 	 * @return Array of segments
 	 */
-	public static Segment[] getSegments(Wave wave, int segmentSize, int overlapFactor, String windowType){
+	public static Segment[] getSegments(Wave wave, int segmentSize, 
+			int overlapFactor, int windowType){
+		
 		double[] amplitudes=wave.getAmplitudes();
 		int numSamples = amplitudes.length;
 		
@@ -85,6 +88,20 @@ public class Utils {
 			segmentArray[f] = new Segment(signals[f],wave.getWaveHeader().getSampleRate());
 		}
 		return segmentArray;
+	}
+	
+	public static void printArray(double[] data, String delimiter){
+		System.out.println("length is "+ data.length);
+		for(int i=0; i< data.length; i++){
+			System.out.print(data[i] + delimiter);
+		}
+	}
+	
+	public static void printArray(int[] data, String delimiter){
+		System.out.println("length is "+ data.length);
+		for(int i=0; i< data.length; i++){
+			System.out.print(data[i] + delimiter);
+		}
 	}
 
 }
