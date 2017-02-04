@@ -34,7 +34,7 @@ public class Segment {
 		this.amplitude = amplitude;
 		this.samplingRate = (double)samplingRate;
 		
-		buildFFT2(amplitude);
+		buildFFT(amplitude);
 	}
 	
 	private void buildFFT(double[] amplitude){

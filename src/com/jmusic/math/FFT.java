@@ -1,6 +1,4 @@
 package com.jmusic.math;
-import static java.lang.Math.*;
-
 import com.jmusic.segment.Complex;
 
 /**
@@ -21,9 +19,7 @@ public class FFT {
         for (int i = 0; i < input.length; i++)
             cinput[i] = new Complex(input[i], 0.0);
  
-        fft(cinput);
-        
-        return cinput;
+        return fft(cinput);
     }
     
     /**
@@ -50,50 +46,39 @@ public class FFT {
     	  rfftAns[i] = ans[i];
       
       return rfftAns;
-  }
- 
-    private int bitReverse(int n, int bits) {
-        int reversedN = n;
-        int count = bits - 1;
- 
-        n >>= 1;
-        while (n > 0) {
-            reversedN = (reversedN << 1) | (n & 1);
-            count--;
-            n >>= 1;
-        }
- 
-        return ((reversedN << count) & ((1 << bits) - 1));
     }
  
-    private void fft(Complex[] buffer) {
- 
-        int bits = (int) (log(buffer.length) / log(2));
-        for (int j = 1; j < buffer.length / 2; j++) {
- 
-            int swapPos = bitReverse(j, bits);
-            Complex temp = buffer[j];
-            buffer[j] = buffer[swapPos];
-            buffer[swapPos] = temp;
+    private Complex[] fft(Complex[] x) {
+        int n = x.length;
+
+        // base case
+        if (n == 1) return new Complex[] { x[0] };
+
+        // radix 2 Cooley-Tukey FFT
+        if (n % 2 != 0) { throw new RuntimeException("n is not a power of 2"); }
+
+        // fft of even terms
+        Complex[] even = new Complex[n/2];
+        for (int k = 0; k < n/2; k++) {
+            even[k] = x[2*k];
         }
- 
-        for (int N = 2; N <= buffer.length; N <<= 1) {
-            for (int i = 0; i < buffer.length; i += N) {
-                for (int k = 0; k < N / 2; k++) {
- 
-                    int evenIndex = i + k;
-                    int oddIndex = i + k + (N / 2);
-                    Complex even = buffer[evenIndex];
-                    Complex odd = buffer[oddIndex];
- 
-                    double term = (-2 * PI * k) / (double) N;
-                    Complex exp = (new Complex(cos(term), sin(term)).mult(odd));
- 
-                    buffer[evenIndex] = even.add(exp);
-                    buffer[oddIndex] = even.sub(exp);
-                }
-            }
+        Complex[] q = fft(even);
+
+        // fft of odd terms
+        Complex[] odd  = even;  // reuse the array
+        for (int k = 0; k < n/2; k++) {
+            odd[k] = x[2*k + 1];
         }
+        Complex[] r = fft(odd);
+
+        // combine
+        Complex[] y = new Complex[n];
+        for (int k = 0; k < n/2; k++) {
+            double kth = -2 * k * Math.PI / n;
+            Complex wk = new Complex(Math.cos(kth), Math.sin(kth));
+            y[k]       = q[k].add(wk.mult(r[k]));
+            y[k + n/2] = q[k].sub(wk.mult(r[k]));
+        }
+        return y;
     }
-    
 }
