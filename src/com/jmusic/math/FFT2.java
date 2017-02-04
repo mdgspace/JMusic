@@ -24,6 +24,9 @@
  */
 package com.jmusic.math;
 
+import com.jmusic.segment.Complex;
+import com.jmusic.utils.Utils;
+
 /**
  * Fast Fourier Transformer.
  *
@@ -744,5 +747,20 @@ public final class FFT2 {
             data[m] = tempi;
         }
 
+    }
+    
+    public Complex[] getCTransform(double[] data)
+    {
+    	int indexSize = data.length;
+    	Complex[] ans = new Complex[indexSize/2];
+    	
+    	double amp[] = new double[indexSize];
+		System.arraycopy(data, 0, amp, 0, indexSize);
+		transform(amp);
+		
+		for(int i = 0;i<indexSize;i+=2){
+			ans[i/2] = new Complex(amp[i], amp[i+1]);
+		}
+    	return ans;
     }
 }

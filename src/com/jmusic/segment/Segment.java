@@ -46,17 +46,8 @@ public class Segment {
 	
 	private void buildFFT2(double[] amplitude){
 		int indexSize = amplitude.length;
-		double amp[] = new double[indexSize];
-		System.arraycopy(amplitude, 0, amp, 0, indexSize);
-		
 		FFT2 fft = new FFT2(indexSize/2,-1);
-		fft.transform(amp);
-		
-		frequencies = new Complex[indexSize/2];
-		for(int i = 0;i<indexSize;i+=2){
-			frequencies[i/2] = new Complex(amp[i], amp[i+1]);
-		}
-		
+		this.frequencies = fft.getCTransform(amplitude);
 		this.absFrequencies = Utils.complexToAbs(frequencies);
 	}
 	
