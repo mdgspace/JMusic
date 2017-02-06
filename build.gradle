@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+archivesBaseName = 'com.jmusic'
+version = '0.1.0' 
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+   compile 'com.google.code.gson:gson:2.2.4'
+} 
