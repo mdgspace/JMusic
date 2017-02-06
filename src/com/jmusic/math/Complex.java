@@ -1,4 +1,4 @@
-package com.jmusic.segment;
+package com.jmusic.math;
 
 /**
  * Data structure to hold complex number and provide basic mathematical

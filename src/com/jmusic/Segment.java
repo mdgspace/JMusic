@@ -1,4 +1,4 @@
-package com.jmusic.segment;
+package com.jmusic;
 
 import com.jmusic.feature.MFCC;
 import com.jmusic.feature.Rolloff;
@@ -6,6 +6,7 @@ import com.jmusic.feature.SpectralCentroid;
 import com.jmusic.feature.SpectralMean;
 import com.jmusic.feature.SpectralVariance;
 import com.jmusic.feature.ZeroCrossingRate;
+import com.jmusic.math.Complex;
 import com.jmusic.math.FFT;
 import com.jmusic.utils.Utils;
 import com.jmusic.wave.Wave;

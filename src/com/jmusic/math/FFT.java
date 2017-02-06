@@ -1,5 +1,4 @@
 package com.jmusic.math;
-import com.jmusic.segment.Complex;
 
 /**
  * 

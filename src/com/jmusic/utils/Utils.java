@@ -1,7 +1,7 @@
 package com.jmusic.utils;
 
-import com.jmusic.segment.Complex;
-import com.jmusic.segment.Segment;
+import com.jmusic.Segment;
+import com.jmusic.math.Complex;
 import com.jmusic.wave.Wave;
 
 /**

@@ -24,7 +24,6 @@
  */
 package com.jmusic.math;
 
-import com.jmusic.segment.Complex;
 import com.jmusic.utils.Utils;
 
 /**

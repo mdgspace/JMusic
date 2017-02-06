@@ -1,6 +1,6 @@
 package com.jmusic.demo;
 
-import com.jmusic.segment.Segment;
+import com.jmusic.Segment;
 import com.jmusic.utils.Utils;
 import com.jmusic.utils.WindowFunction;
 import com.jmusic.wave.Wave;

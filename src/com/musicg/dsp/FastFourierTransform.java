@@ -16,8 +16,8 @@
 
 package com.musicg.dsp;
 
+import com.jmusic.math.Complex;
 import com.jmusic.math.FFT;
-import com.jmusic.segment.Complex;
 
 /**
  * FFT object, transform amplitudes to frequency intensities
