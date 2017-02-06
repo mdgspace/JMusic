@@ -1,10 +1,8 @@
 package com.jmusic.feature;
 
-import com.jmusic.utils.Utils;
-
 /**
- * Calculate Mel Frequency Cepstrum Coeffecients from the magnitude spectrum
- * of a signal
+ * Calculate Mel Frequency Cepstrum Coeffecients from the magnitude 
+ * spectrum of a signal
  * 
  * @author Deepankar Agrawal
  *
@@ -19,19 +17,16 @@ public class MFCC extends Feature<double[]>{
     /**
      * Number of MFCCs per frame
      */
-    public int numCepstra = 13;
-    /**
-     * Pre-Emphasis Alpha (Set to 0 if no pre-emphasis should be performed)
-     */
-    private final static double preEmphasisAlpha = 0;
+    public int numCepstral = 12;
+    
     /**
      * lower limit of filter (or 64 Hz?)
      */
-    private final static double lowerFilterFreq = 133.3334;
+    private static double lowerFilterFreq = 0;
     /**
      * upper limit of filter (or half of sampling freq.?)
      */
-    private final static double upperFilterFreq = 6855.4976;
+    private static double upperFilterFreq = 8000;
     /**
      * number of mel filters (SPHINX-III uses 40)
      */
@@ -43,41 +38,35 @@ public class MFCC extends Feature<double[]>{
 	 * @param samplingRate
 	 */
 	public MFCC(double[] signal, double samplingRate){
-		this(signal, samplingRate, 13);
+		this(signal, samplingRate, 12);
 	}
 	
 	public MFCC(double[] signal, double samplingRate, int numCepc){
-		this.numCepstra = numCepc;
+		this.numCepstral = numCepc;
 		
 		setValues(signal, samplingRate);	
 		frameLength = signal.length;
+		upperFilterFreq = frameLength/2;
 	}
 
 	@Override
 	public double[] evaluate() {
-
-        // Pre-Emphasis
-//        double outputSignal[] = preEmphasis(signal);
         
         // Mel Filtering
         int cbin[] = fftBinIndices(samplingRate, frameLength);
-        //Utils.printArray(cbin, "\n");
        
         // get Mel Filterbank
         double fbank[] = melFilter(signal, cbin);
-//        Utils.printArray(fbank, "\n");
 
         // Non-linear transformation
         double f[] = nonLinearTransformation(fbank);
 
-        // Cepstral coefficients
-        return cepCoefficients(f);
+        return dct(f, true);
         
 	}
 	
 	/**
      * calculates the FFT bin indices<br>
-     * calls: none<br>
      * 
      * 5-3-05 Daniel MCEnnis paramaterize sampling rate and frameSize
      * 
@@ -87,7 +76,7 @@ public class MFCC extends Feature<double[]>{
         int cbin[] = new int[numMelFilters + 2];
         
         cbin[0] = (int)Math.round(lowerFilterFreq / samplingRate * frameSize);
-        cbin[cbin.length - 1] = (int)(frameSize / 2);
+        cbin[cbin.length - 1] = (int)(upperFilterFreq);
         
         for (int i = 1; i <= numMelFilters; i++){
             double fc = centerFreq(i,samplingRate);
@@ -97,6 +86,7 @@ public class MFCC extends Feature<double[]>{
         
         return cbin;
     }
+    
     /**
      * Calculate the output of the mel filter<br>
      */
@@ -124,28 +114,46 @@ public class MFCC extends Feature<double[]>{
 
         return fbank;
     }
+    
     /**
-     * Cepstral coefficients are calculated from the output of the Non-linear Transformation method<br>
-     * calls: none<br>
-     * called by: featureExtraction
+     * Cepstral coefficients are calculated from the output of the
+     * Non-linear Transformation method<br>
+     *
      * @param f Output of the Non-linear Transformation method
      * @return Cepstral Coefficients
      */
-    private double[] cepCoefficients(double f[]){
-        double cepc[] = new double[numCepstra];
+    private double[] dct(double f[], boolean normalize){
+        double cepc[] = new double[numCepstral];
+        double normalizationFactor = 1.0;
+        double numMel = (double)numMelFilters;
         
-        for (int i = 0; i < cepc.length; i++){
-            for (int j = 1; j <= numMelFilters; j++){
-                cepc[i] += f[j - 1] * Math.cos(Math.PI * i / numMelFilters * (j - 0.5));
+        for (int i = 0; i < numCepstral; i++){
+            for (int j = 0; j < numMelFilters; j++){
+                cepc[i] += f[j] * Math.cos(Math.PI * i / numMel * (j + 0.5));    
             }
+            
+            cepc[i] = cepc[i] * 2;
+            
+          //normalize
+            
+            if(normalize){
+            	if(i==0){	
+                	  normalizationFactor = Math.sqrt(1/(4*numMel));
+                }else normalizationFactor = Math.sqrt(1/(2*numMel));
+                  
+                cepc[i] = cepc[i] * normalizationFactor;
+            }       
         }
+        
+        
         
         return cepc;
     }
+    
     /**
-     * the output of mel filtering is subjected to a logarithm function (natural logarithm)<br>
-     * calls: none<br>
-     * called by: featureExtraction
+     * the output of mel filtering is subjected to a logarithm 
+     * function (natural logarithm)<br>
+     * 
      * @param fbank Output of mel filtering
      * @return Natural log of the output of mel filtering
      */
@@ -162,68 +170,38 @@ public class MFCC extends Feature<double[]>{
         
         return f;
     }
-    /**
-     * calculates logarithm with base 10<br>
-     * calls: none<br>
-     * called by: featureExtraction
-     * @param value Number to take the log of
-     * @return base 10 logarithm of the input values
-     */
-    private static double log10(double value){
-        return Math.log(value) / Math.log(10);
-    }
+    
     /**
      * calculates center frequency<br>
-     * calls: none<br>
-     * called by: featureExtraction
+     * 
      * @param i Index of mel filters
      * @return Center Frequency
      */
-    private static double centerFreq(int i,double samplingRate){
+    private double centerFreq(int i,double samplingRate){
         double mel[] = new double[2];
         mel[0] = freqToMel(lowerFilterFreq);
-        mel[1] = freqToMel(samplingRate / 2);
+        mel[1] = freqToMel(upperFilterFreq);
         
         // take inverse mel of:
         double temp = mel[0] + ((mel[1] - mel[0]) / (numMelFilters + 1)) * i;
         return inverseMel(temp);
     }
+    
     /**
      * calculates the inverse of Mel Frequency<br>
-     * calls: none<br>
-     * called by: featureExtraction
+     * 
      */
-    private static double inverseMel(double x){
-        double temp = Math.pow(10, x / 2595) - 1;
-        return 700 * (temp);
+    private double inverseMel(double x){
+        return 700 * (Math.expm1(x/1125));
     }
     /**
      * convert frequency to mel-frequency<br>
-     * calls: none<br>
-     * called by: featureExtraction
+     * 
      * @param freq Frequency
      * @return Mel-Frequency
      */
-    private static double freqToMel(double freq){
-        return 2595 * log10(1 + freq / 700);
-    }
-    
-    /**
-     * perform pre-emphasis to equalize amplitude of high and low frequency<br>
-     * calls: none<br>
-     * called by: featureExtraction
-     * @param inputSignal Speech Signal (16 bit integer data)
-     * @return Speech signal after pre-emphasis (16 bit integer data)
-     */
-    protected static double[] preEmphasis(double inputSignal[]){
-        double outputSignal[] = new double[inputSignal.length];
-        
-        // apply pre-emphasis to each sample
-        for (int n = 1; n < inputSignal.length; n++){
-            outputSignal[n] = inputSignal[n] - preEmphasisAlpha * inputSignal[n - 1];
-        }
-        
-        return outputSignal;
+    private double freqToMel(double freq){
+        return 1125 * Math.log(1 + freq / 700);
     }
 
 }
