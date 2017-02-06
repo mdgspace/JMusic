@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.jmusic.feature;
 
 /**
@@ -24,7 +21,7 @@ public class Chroma extends Feature< double[] > {
 			double frequencyi = df*i;
 			
 			int pitch;
-			// Conversion from frquency to pitch
+			// Conversion from frequency to pitch
 			if(frequencyi == 0){
 				pitch = 0;
 			}
@@ -50,9 +47,9 @@ public class Chroma extends Feature< double[] > {
 	 * Convert a given frequency in Hertz to its corresponding 
 	 * MIDI pitch number (60 = Middle C)
 	 */
-	public int frequencyToMidi(double frequency)
-	{
-		double flog2 =  Math.log(frequency / 440.0) / Math.log(2); 
+	private int frequencyToMidi(double frequency){
+		double flog2 =  Math.log(frequency / 440.0) / Math.log(2);
+		
 		return (int) (Math.round(69 + 12 * (flog2)));
 	}
 

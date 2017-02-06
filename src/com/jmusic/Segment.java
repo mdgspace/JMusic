@@ -1,5 +1,6 @@
 package com.jmusic;
 
+import com.jmusic.feature.Chroma;
 import com.jmusic.feature.MFCC;
 import com.jmusic.feature.Rolloff;
 import com.jmusic.feature.SpectralCentroid;
@@ -88,13 +89,33 @@ public class Segment {
 		return rollOff.evaluate();
 	}
 	
+	/**
+	 * 
+	 * @return array of 12 chroma features
+	 */
+	public double[] chroma(){
+		Chroma chroma = new Chroma(absFrequencies, samplingRate);
+		
+		return chroma.evaluate();
+	}
+	
+	/**
+	 * Calculate Mel Frequency Cepstrum Coeffecients from the magnitude 
+	 * spectrum of a signal
+	 * 
+	 * @return first 12 Mfcc coefficients
+	 */
 	public double[] mfcc(){
 		MFCC mfcc = new MFCC(absFrequencies, samplingRate);
 		
 		return mfcc.evaluate();
 	}
 	
-	
+	/**
+	 * Evaluate the zero crossing rate of a signal
+	 * 
+	 * @return value of zcr
+	 */
 	public double zcr(){
 		ZeroCrossingRate zcr = new ZeroCrossingRate(amplitude, samplingRate);
 		
