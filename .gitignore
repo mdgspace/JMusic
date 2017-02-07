@@ -49,3 +49,4 @@ local.properties
 # Project related dependencies
 audio_work/
 out/
+feature_data.json
