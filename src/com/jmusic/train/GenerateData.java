@@ -16,7 +16,7 @@ public class GenerateData {
 	
 	public static final String [] genres = {"blues", "classical", 
 			"country", "disco", "hiphop", "jazz", "metal", 
-			"pop", "rock"};
+			"pop", "reggae", "rock"};
 	
 	private static ArrayList<JsonModel> models = new ArrayList<>();
 	
@@ -72,7 +72,7 @@ public class GenerateData {
 			}
 		}
 		
-		System.out.println("Starting to write to data.json");
+		System.out.println("Starting to write to feature_data.json");
 		final Gson gson = new Gson();
 		String s = gson.toJson(models);
 		

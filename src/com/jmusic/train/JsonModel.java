@@ -3,11 +3,11 @@ package com.jmusic.train;
 public class JsonModel {
 	
 	public String genre;
-	public String songName;
-	public double spectralMean;
-	public double spectralVariance;
-	public double spectralCentroid;
-	public double rollOff;
+	public String song_name;
+	public double mean;
+	public double variance;
+	public double centroid;
+	public double rolloff;
 	public double[] mfcc;
 	public double[] chroma;
 	public double zcr;
@@ -18,11 +18,11 @@ public class JsonModel {
 			double spectralCentroid, double rollOff, double[] mfcc, double[] chroma, double zcr) {
 		
 		this.genre = genre;
-		this.songName = songName;
-		this.spectralMean = spectralMean;
-		this.spectralVariance = spectralVariance;
-		this.spectralCentroid = spectralCentroid;
-		this.rollOff = rollOff;
+		this.song_name = songName;
+		this.mean = spectralMean;
+		this.variance = spectralVariance;
+		this.centroid = spectralCentroid;
+		this.rolloff = rollOff;
 		this.mfcc = mfcc;
 		this.chroma = chroma;
 		this.zcr = zcr;
