@@ -1,4 +1,4 @@
-package com.musicg.main.demo;
+package com.musicg.demo;
 
 import com.jmusic.wave.Wave;
 import com.jmusic.wave.extension.Spectrogram;

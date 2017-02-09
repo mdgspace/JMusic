@@ -16,9 +16,10 @@
 
 package com.jmusic.wave.extension;
 
+import com.jmusic.math.Complex;
+import com.jmusic.math.FFT;
 import com.jmusic.utils.WindowFunction;
 import com.jmusic.wave.Wave;
-import com.musicg.dsp.FastFourierTransform;
 
 /**
  * Handles the wave data in frequency-time domain.
@@ -124,9 +125,8 @@ public class Spectrogram{
 			
 		absoluteSpectrogram=new double[numFrames][];
 		// for each frame in signals, do fft on it
-		FastFourierTransform fft = new FastFourierTransform();
 		for (int i=0; i<numFrames; i++){			
-			absoluteSpectrogram[i]=fft.getMagnitudes(signals[i]);
+			absoluteSpectrogram[i]= getFFT(signals[i]);
 		}
 			
 		if (absoluteSpectrogram.length>0){
@@ -172,6 +172,23 @@ public class Spectrogram{
 			}
 			// end normalization
 		}
+	}
+	
+	private double[] getFFT(double[] amplitudes) {
+
+		// call the fft and transform the complex numbers
+		FFT fft = new FFT();
+		Complex[] fftData = fft.transform_rfft(amplitudes);
+		
+		int pos = 0;
+        double ans[] = new double[2*fftData.length];
+        
+        for (Complex c : fftData) {
+        	ans[pos] = c.re;
+        	ans[pos+1] = c.im;
+        	pos+=2;
+        }
+        return ans;
 	}
 	
 	/**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.musicg.properties;
+package com.musicg.fingerprint;
 
 public class FingerprintProperties{
 	

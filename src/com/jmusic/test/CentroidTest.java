@@ -1,7 +1,6 @@
-package com.jmusic.demo;
+package com.jmusic.test;
 
 import com.jmusic.feature.SpectralCentroid;
-import com.jmusic.math.FFT;
 
 public class CentroidTest {
 

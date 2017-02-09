@@ -1,11 +1,10 @@
-package com.musicg.experiment.test;
+package com.jmusic.test;
 
 import com.jmusic.wave.Wave;
 import com.jmusic.wave.extension.Spectrogram;
+import com.musicg.math.PitchHandler;
 import com.musicg.math.rank.ArrayRankDouble;
-import com.musicg.math.statistics.SpectralCentroid;
 import com.musicg.math.statistics.StandardDeviation;
-import com.musicg.pitch.PitchHandler;
 
 public class Test1 {
 
@@ -35,7 +34,6 @@ public class Test1 {
 		double[][] absoluteSpectrogramData=spectrogram.getAbsoluteSpectrogramData();
 		double[][] boundedSpectrogramData=new double[spectrogramData.length][];
 		
-		SpectralCentroid sc=new SpectralCentroid();
 		StandardDeviation sd=new StandardDeviation();		
 		ArrayRankDouble arrayRankDouble=new ArrayRankDouble();
 		
@@ -45,7 +43,7 @@ public class Test1 {
 		double[] zcrs=new double[numFrame];
 		
 		for (int i=0; i<numFrame; i++){
-			short[] temp=new short[1024];
+			double[] temp=new double[1024];
 			System.arraycopy(amps, i*1024, temp, 0, temp.length);
 			
 			int numZC=0;

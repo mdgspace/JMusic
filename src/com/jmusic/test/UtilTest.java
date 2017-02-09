@@ -1,4 +1,4 @@
-package com.jmusic.demo;
+package com.jmusic.test;
 
 import java.io.BufferedWriter;
 import java.io.File;

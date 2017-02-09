@@ -22,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.musicg.math.quicksort.QuickSortIndexPreserved;
-import com.musicg.properties.FingerprintProperties;
 
 /**
  * Make pairs for the audio fingerprints, which a pair is used to group the same features together

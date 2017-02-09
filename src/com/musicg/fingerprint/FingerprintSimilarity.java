@@ -15,8 +15,6 @@
  */
 package com.musicg.fingerprint;
 
-import com.musicg.properties.FingerprintProperties;
-
 /**
  * A class for fingerprint's similarity
  * 

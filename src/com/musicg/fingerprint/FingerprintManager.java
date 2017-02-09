@@ -30,7 +30,6 @@ import com.jmusic.wave.Wave;
 import com.jmusic.wave.WaveHeader;
 import com.jmusic.wave.extension.Spectrogram;
 import com.musicg.processor.TopManyPointsProcessorChain;
-import com.musicg.properties.FingerprintProperties;
 
 /**
  * Audio fingerprint manager, handle fingerprint operations

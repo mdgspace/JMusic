@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.musicg.experiment.math.cluster;
+package com.musicg.math.cluster;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.musicg.pitch.PitchHandler;
+import com.musicg.math.PitchHandler;
 
 public class SegmentCluster{
 	

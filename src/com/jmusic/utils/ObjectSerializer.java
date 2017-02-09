@@ -1,4 +1,4 @@
-package com.musicg.serialization;
+package com.jmusic.utils;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

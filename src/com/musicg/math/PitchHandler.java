@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.musicg.pitch;
+package com.musicg.math;
 
 import java.util.Arrays;
 

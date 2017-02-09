@@ -1,4 +1,4 @@
-package com.jmusic.demo;
+package com.jmusic.test;
 
 public class Test2 {
 

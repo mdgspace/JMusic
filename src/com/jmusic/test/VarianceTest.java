@@ -1,4 +1,4 @@
-package com.jmusic.demo;
+package com.jmusic.test;
 
 import com.jmusic.feature.SpectralMean;
 import com.jmusic.feature.SpectralVariance;

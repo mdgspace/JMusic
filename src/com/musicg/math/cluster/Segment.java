@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Jacquet Wong
+ * Copyright (C) 2011 Jacquet Wong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.musicg.main.demo;
 
-import com.jmusic.wave.Wave;
-import com.jmusic.wave.WaveTypeDetector;
+package com.musicg.math.cluster;
+public class Segment {
+	
+	private int startPosition;
+	private int size;
+	private double mean;
 
-public class WhistleApiDemo{
-	public static void main(String[] args){		
-		String filename = "audio_work/whistle.wav";
+	public int getStartPosition() {
+		return startPosition;
+	}
 
-		// create a wave object
-		Wave wave = new Wave(filename);
+	public void setStartPosition(int startPosition) {
+		this.startPosition = startPosition;
+	}
 
-		WaveTypeDetector waveTypeDetector=new WaveTypeDetector(wave);
-		System.out.println("Is whistle probability: "+waveTypeDetector.getWhistleProbability());
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public double getMean() {
+		return mean;
+	}
+
+	public void setMean(double mean) {
+		this.mean = mean;
 	}
 }
