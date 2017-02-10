@@ -10,7 +10,6 @@ import com.jmusic.feature.ZeroCrossingRate;
 import com.jmusic.math.Complex;
 import com.jmusic.math.FFT;
 import com.jmusic.utils.Utils;
-import com.jmusic.wave.Wave;
 
 /**
  * Container class for features of audio data segments
@@ -24,23 +23,25 @@ public class Segment {
 	public Complex[] frequencies;
 	public double[] absFrequencies;
 	
-	public double samplingRate;
+	private double samplingRate;
+	private int overlapFactor;
+	private int windowType;
 	
-	public Segment(Wave wave){
-		this(wave.getAmplitudes(), wave.getWaveHeader().getSampleRate());
-	}
 	
-	public Segment(double[] amplitude, int samplingRate){
+	
+	public Segment(double[] amplitude, int samplingRate, int overlapFactor, int windowType){
 		this.amplitude = amplitude;
 		this.samplingRate = (double)samplingRate;
+		this.overlapFactor = overlapFactor;
+		this.windowType = windowType;
 		
-		buildFFT(amplitude);
+		buildFFT(amplitude, windowType);
 	}
 	
-	private void buildFFT(double[] amplitude){
+	private void buildFFT(double[] amplitude, int windowType){
 		// call the fft and transform to fourier domain
 		FFT fft = new FFT();
-		this.frequencies = fft.transform_rfft(amplitude);
+		this.frequencies = fft.transform_rfft(amplitude, windowType);
 		this.absFrequencies = Utils.complexToAbs(frequencies);
 	}
 	
@@ -120,6 +121,14 @@ public class Segment {
 		ZeroCrossingRate zcr = new ZeroCrossingRate(amplitude, samplingRate);
 		
 		return zcr.evaluate();
+	}
+
+	public int getOverlapFactor() {
+		return overlapFactor;
+	}
+
+	public int getWindowType() {
+		return windowType;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.jmusic.math;
 
+import com.jmusic.utils.WindowFunction;
+
 /**
  * 
  * @author Anshul Shah, Deepankar Agrawal
@@ -12,11 +14,15 @@ public class FFT {
      * @param input input data to be transformed
      * @return transformed data
      */
-    public Complex[] transform(double input[]) {
+    public Complex[] transform(double input[], int windowType) {
+    	
+    	WindowFunction window = new WindowFunction();
+		window.setWindowType(windowType);
+		double[] win=window.generate(input.length);
  
         Complex[] cinput = new Complex[input.length];
         for (int i = 0; i < input.length; i++)
-            cinput[i] = new Complex(input[i], 0.0);
+            cinput[i] = new Complex(input[i]*win[i], 0.0);
  
         return fft(cinput);
     }
@@ -33,9 +39,9 @@ public class FFT {
      * @return transformed data
      * 
      */
-    public Complex[] transform_rfft(double input[]) {
+    public Complex[] transform_rfft(double input[], int windowType) {
 
-      Complex ans[] = transform(input);
+      Complex ans[] = transform(input, windowType);
       
       // Calculates rfft from fft
       int arrSize = ans.length;

@@ -31,7 +31,7 @@ public class UtilTest {
 	}
 	
 	public void Test2(int segmentSize) {
-		Segment[] segment = Utils.getSegments(wave, segmentSize, 0,WindowFunction.HAMMING);
+		Segment[] segment = wave.getSegments(segmentSize, 0,WindowFunction.HAMMING);
 
 		BufferedWriter writer = null;
         try {

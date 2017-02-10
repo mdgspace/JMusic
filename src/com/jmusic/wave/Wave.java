@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import com.jmusic.Segment;
 import com.jmusic.wave.extension.NormalizedSampleAmplitudes;
-import com.jmusic.wave.extension.Spectrogram;
 import com.musicg.fingerprint.FingerprintManager;
 import com.musicg.fingerprint.FingerprintSimilarity;
 import com.musicg.fingerprint.FingerprintSimilarityComputer;
@@ -43,17 +43,8 @@ public class Wave implements Serializable{
 	/**
 	 * Constructor
 	 * 
-	 */
-	public Wave() {
-		this.waveHeader=new WaveHeader();
-		this.data=new byte[0];
-	}
-
-	/**
-	 * Constructor
+	 * @param filename Wave file
 	 * 
-	 * @param filename
-	 *            Wave file
 	 */
 	public Wave(String filename) {
 		try {
@@ -70,8 +61,7 @@ public class Wave implements Serializable{
 	/**
 	 * Constructor
 	 * 
-	 * @param inputStream
-	 *            Wave file input stream
+	 * @param inputStream Wave file input stream
 	 */
 	public Wave(InputStream inputStream) {
 		initWaveWithInputStream(inputStream);
@@ -80,10 +70,8 @@ public class Wave implements Serializable{
 	/**
 	 * Constructor
 	 * 
-	 * @param WaveHeader
-	 *            waveHeader
-	 * @param byte[]
-	 *            data
+	 * @param WaveHeader waveHeader
+	 * @param byte[] data
 	 */
 	public Wave(WaveHeader waveHeader, byte[] data) {
 		this.waveHeader = waveHeader;
@@ -106,6 +94,58 @@ public class Wave implements Serializable{
 		} else {
 			System.err.println("Invalid Wave Header");
 		}
+	}
+	
+	/*
+	 * @param segmentSize: size of one Segment
+	 * @param overlapFactor: overlap fraction
+	 * @param windowType: default- Hamming window
+	 * 
+	 * @return Array of segments
+	 */
+	public Segment[] getSegments(int segmentSize, int overlapFactor, int windowType){
+		
+		double[] amplitudes= getAmplitudes();
+		int numSamples = amplitudes.length;
+		
+		int pointer=0;
+		
+		// overlapping
+		if (overlapFactor>1){
+			int numOverlappedSamples=numSamples*overlapFactor;
+			int backSamples=segmentSize*(overlapFactor-1)/overlapFactor;
+			int fftSampleSize_1=segmentSize-1;
+			double[] overlapAmp= new double[numOverlappedSamples];
+
+			for (int i=0; i<amplitudes.length; i++){
+				overlapAmp[pointer++]=amplitudes[i];
+				if (pointer%segmentSize==fftSampleSize_1){
+					// overlap
+					i-=backSamples;
+				}
+			}
+			numSamples=numOverlappedSamples;
+			amplitudes=overlapAmp;
+		}
+		// end overlapping
+			
+		int numFrames=numSamples/segmentSize;	
+			
+		// Segmentation of Amplitude Data 
+		
+		Segment[] segmentArray = new Segment[numFrames];
+		
+		for(int f=0; f<numFrames; f++) {
+			double [] signals=new double[segmentSize];
+			int startSample = f*segmentSize;
+			for (int n=0; n<segmentSize; n++){
+				signals[n]=amplitudes[startSample+n];							
+			}
+			segmentArray[f] = new Segment(signals, getWaveHeader().getSampleRate(), 
+					overlapFactor, windowType);
+		}
+		
+		return segmentArray;
 	}
 
 	/**
@@ -146,26 +186,6 @@ public class Wave implements Serializable{
 	}
 
 	/**
-	 * Trim the wave data from beginning
-	 * 
-	 * @param numberOfSample
-	 *            numberOfSample trimmed from beginning
-	 */
-	public void leftTrim(int numberOfSample) {
-		trim(numberOfSample, 0);
-	}
-
-	/**
-	 * Trim the wave data from ending
-	 * 
-	 * @param numberOfSample
-	 *            numberOfSample trimmed from ending
-	 */
-	public void rightTrim(int numberOfSample) {
-		trim(0, numberOfSample);
-	}
-
-	/**
 	 * Trim the wave data
 	 * 
 	 * @param leftTrimSecond
@@ -188,26 +208,6 @@ public class Wave implements Serializable{
 	}
 
 	/**
-	 * Trim the wave data from beginning
-	 * 
-	 * @param second
-	 *            Seconds trimmed from beginning
-	 */
-	public void leftTrim(double second) {
-		trim(second, 0);
-	}
-
-	/**
-	 * Trim the wave data from ending
-	 * 
-	 * @param second
-	 *            Seconds trimmed from ending
-	 */
-	public void rightTrim(double second) {
-		trim(0, second);
-	}
-
-	/**
 	 * Get the wave header
 	 * 
 	 * @return waveHeader
@@ -216,26 +216,6 @@ public class Wave implements Serializable{
 		return waveHeader;
 	}
 	
-	/**
-	 * Get the wave spectrogram
-	 * 
-	 * @return spectrogram
-	 */
-	public Spectrogram getSpectrogram(){
-		return new Spectrogram(this);
-	}
-	
-	/**
-	 * Get the wave spectrogram
-	 * 
-	 * @param fftSampleSize	number of sample in fft, the value needed to be a number to power of 2
-	 * @param overlapFactor	1/overlapFactor overlapping, e.g. 1/4=25% overlapping, 0 for no overlapping
-	 * 
-	 * @return spectrogram
-	 */
-	public Spectrogram getSpectrogram(int fftSampleSize, int overlapFactor) {
-		return new Spectrogram(this,fftSampleSize,overlapFactor);
-	}
 	
 	/**
 	 * Get the wave data in bytes
@@ -261,8 +241,7 @@ public class Wave implements Serializable{
 	 * @return length in second
 	 */
 	public float length() {
-		float second = (float) waveHeader.getSubChunk2Size() / waveHeader.getByteRate();
-		return second;
+		return (float) waveHeader.getSubChunk2Size() / waveHeader.getByteRate();
 	}
 
 	/**

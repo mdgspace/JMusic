@@ -79,7 +79,7 @@ public class FingerprintManager{
         // end resample to target rate
         
 		// get spectrogram's data
-		Spectrogram spectrogram=resampledWave.getSpectrogram(sampleSizePerFrame, overlapFactor);
+		Spectrogram spectrogram=new Spectrogram(resampledWave, sampleSizePerFrame, overlapFactor);
 		double[][] spectorgramData=spectrogram.getNormalizedSpectrogramData();
 		
 		List<Integer>[] pointsLists=getRobustPointList(spectorgramData);

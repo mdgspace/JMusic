@@ -178,7 +178,7 @@ public class Spectrogram{
 
 		// call the fft and transform the complex numbers
 		FFT fft = new FFT();
-		Complex[] fftData = fft.transform_rfft(amplitudes);
+		Complex[] fftData = fft.transform_rfft(amplitudes, WindowFunction.HAMMING);
 		
 		int pos = 0;
         double ans[] = new double[2*fftData.length];

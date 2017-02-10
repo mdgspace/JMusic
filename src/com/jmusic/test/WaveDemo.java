@@ -1,7 +1,6 @@
 package com.jmusic.test;
 
 import com.jmusic.wave.Wave;
-import com.jmusic.wave.WaveFileManager;
 
 public class WaveDemo {
 
@@ -15,13 +14,8 @@ public class WaveDemo {
 
 		// print the wave header and info
 		System.out.println(wave);
+		
+		wave.trim(0.1, 0);
 
-		// trim the wav
-		wave.leftTrim(1);
-		wave.rightTrim(0.5F);
-
-		// save the trimmed wav
-//		WaveFileManager waveFileManager=new WaveFileManager(wave);
-//		waveFileManager.saveWaveAsFile(outFolder+"/out.wav");
 	}
 }

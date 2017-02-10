@@ -25,10 +25,6 @@ public class WaveFileManager{
 	
 	private Wave wave;
 	
-	public WaveFileManager(){	
-		wave=new Wave();
-	}
-	
 	public WaveFileManager(Wave wave){
 		setWave(wave);
 	}

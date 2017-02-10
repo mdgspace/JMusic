@@ -97,7 +97,7 @@ public class DetectionApi {
 			double[] amplitudes = wave.getAmplitudes();
 
 			// spectrum for the clip
-			Spectrogram spectrogram = wave.getSpectrogram(fftSampleSize, 0);
+			Spectrogram spectrogram = new Spectrogram(wave, fftSampleSize, 0);
 			
 			double[][] spectrogramData = spectrogram.getAbsoluteSpectrogramData();
 
