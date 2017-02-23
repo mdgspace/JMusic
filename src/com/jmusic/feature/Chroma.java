@@ -29,7 +29,8 @@ public class Chroma extends Feature< double[] > {
 				pitch = frequencyToMidi(frequencyi);
 			}
 			
-			int pitchClass = Math.floorMod(pitch, 12);
+			int pitchClass = pitch%12;
+			if(pitchClass<0) pitchClass += 12;
 			
 			chroma[pitchClass] += signal[i];
 		}
