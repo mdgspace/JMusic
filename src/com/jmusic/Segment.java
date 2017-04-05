@@ -10,6 +10,7 @@ import com.jmusic.feature.ZeroCrossingRate;
 import com.jmusic.math.Complex;
 import com.jmusic.math.FFT;
 import com.jmusic.utils.Utils;
+import com.jmusic.utils.WindowFunction;
 
 /**
  * Container class for features of audio data segments
@@ -27,7 +28,9 @@ public class Segment {
 	private int overlapFactor;
 	private int windowType;
 	
-	
+	public Segment(double [] amplitude, int samplingRate){
+		this(amplitude, samplingRate, 0, WindowFunction.HAMMING);
+	}
 	
 	public Segment(double[] amplitude, int samplingRate, int overlapFactor, int windowType){
 		this.amplitude = amplitude;

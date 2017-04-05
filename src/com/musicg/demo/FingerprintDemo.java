@@ -29,19 +29,20 @@ public class FingerprintDemo{
 
 		// get the fingerprint
 		byte[] fingerprint=wave.getFingerprint();
+		System.out.println(fingerprint.length);
 
 		// dump the fingerprint
 		FingerprintManager fingerprintManager=new FingerprintManager();
-		fingerprintManager.saveFingerprintAsFile(fingerprint, "out/"+filename+".fingerprint");
+		fingerprintManager.saveFingerprintAsFile(fingerprint, "audio_work/"+filename+".fingerprint");
 		
 		// load fingerprint from file
-		byte[] loadedFp=fingerprintManager.getFingerprintFromFile("out/"+filename+".fingerprint");
+		byte[] loadedFp=fingerprintManager.getFingerprintFromFile("audio_work/"+filename+".fingerprint");
 		
-		/*
+		
 		// fingerprint bytes checking
 		for (int i=0; i<fingerprint.length; i++){
 			System.out.println(fingerprint[i]+" vs "+loadedFp[i]);
 		}
-		*/
+		
 	}
 }

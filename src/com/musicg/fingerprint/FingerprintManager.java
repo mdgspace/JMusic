@@ -261,10 +261,12 @@ public class FingerprintManager{
 
 	/**
 	 * Number of frames in a fingerprint
-	 * Each frame lengths 8 bytes
-	 * Usually there is more than one point in each frame, so it cannot simply divide the bytes length by 8
-	 * Last 8 byte of thisFingerprint is the last frame of this wave
-	 * First 2 byte of the last 8 byte is the x position of this wave, i.e. (number_of_frames-1) of this wave	 
+	 * 
+	 * Each frame lengths 8 bytes. Usually there is more than one point in each frame, 
+	 * so it cannot simply divide the bytes length by 8
+	 * Last 8 byte of this Fingerprint is the last frame of this wave
+	 * First 2 byte of the last 8 byte is the x position of this wave, 
+	 * i.e. (number_of_frames-1) of this wave	 
 	 * 
 	 * @param fingerprint	fingerprint bytes
 	 * @return number of frames of the fingerprint

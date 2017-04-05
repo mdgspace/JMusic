@@ -1,13 +1,11 @@
 package com.jmusic.utils;
 
-import com.jmusic.Segment;
 import com.jmusic.math.Complex;
-import com.jmusic.wave.Wave;
 
 /**
  * Class containing helper functions
  * 
- * @author Deepankar Agrawal,Anshul Shah
+ * @author Deepankar Agrawal, Anshul Shah
  *
  */
 public class Utils {

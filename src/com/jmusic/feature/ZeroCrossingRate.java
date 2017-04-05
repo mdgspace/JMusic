@@ -19,8 +19,7 @@ public class ZeroCrossingRate extends Feature<Double>{
 	public Double evaluate(){
 		double ans = 0;
 		double signalDuration = (double) signal.length / samplingRate; 
-		for(int i = 1;i<signal.length;i++)
-		{
+		for(int i = 1;i<signal.length;i++){
 			if(signal[i]*signal[i-1] < 0) ans++;
 		}
 		ans /= signalDuration;

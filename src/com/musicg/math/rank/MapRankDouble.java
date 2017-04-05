@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class MapRankDouble implements MapRank{
 	
-	private Map map;
+	private Map<?, Double> map;
 	private boolean acsending=true;
 	
 	public MapRankDouble(Map<?,Double> map, boolean acsending){
