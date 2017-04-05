@@ -4,12 +4,21 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.7
 targetCompatibility = 1.8
 
-version = '0.1.0'
+version =  '0.1.0'
 
-jar {
-    baseName = project.name
+sourceSets {
+    main {
+        java {                  
+            srcDirs = ["src"]                                
+            }
+        }
 }
 
+task fatJar(type: Jar) {
+	baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 
 repositories {
     mavenCentral()
