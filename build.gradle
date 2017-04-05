@@ -1,7 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-archivesBaseName = 'com.jmusic'
-version = '0.1.0' 
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.8
+
+version = '0.1.0'
+
+jar {
+    baseName = project.name
+}
+
 
 repositories {
     mavenCentral()
